@@ -1,0 +1,4 @@
+[submodule "DragonBonesCPP"]
+	path = DragonBonesCPP
+	url = https://github.com/DragonBones/DragonBonesCPP
+	branch = master
