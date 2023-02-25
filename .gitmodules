@@ -2,3 +2,7 @@
 	path = DragonBonesCPP
 	url = https://github.com/DragonBones/DragonBonesCPP
 	branch = master
+[submodule "godot-cpp"]
+	path = godot-cpp
+	url = https://github.com/godotengine/godot-cpp.git
+	branch = master
