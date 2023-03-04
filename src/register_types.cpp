@@ -73,6 +73,7 @@ void register_mmdragonbones_types(ModuleInitializationLevel p_level)
 	GDREGISTER_VIRTUAL_CLASS(GDSlot);
 	GDREGISTER_VIRTUAL_CLASS(GDBone2D);
 
+    GDREGISTER_CLASS(MMDragonBones::MMDragonBonesResource);
     GDREGISTER_CLASS(MMDragonBones);
 
 	resource_loader_mmdragonbones.instantiate();
