@@ -1,6 +1,7 @@
 #include "mmdragonbones.h"
 #include "GDArmatureDisplay.h"
 
+#include <godot_cpp/variant/utility_functions.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/classes/resource_format_loader.hpp>
 #include <godot_cpp/core/class_db.hpp>
@@ -44,7 +45,6 @@ public:
 
     virtual bool handles_type(const String& p_type) const
     {
-
 		return p_type=="mmdragonbonesResource";
 	}
 
@@ -62,14 +62,18 @@ static Ref<ResourceFormatLoaderMMDragonBones> resource_loader_mmdragonbones;
 
 void register_mmdragonbones_types(ModuleInitializationLevel p_level)
 {
+    if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
+		return;
+	}
+
     GDREGISTER_VIRTUAL_CLASS(GDOwnerNode);
     GDREGISTER_VIRTUAL_CLASS(GDDisplay);
     
-	GDREGISTER_CLASS(MMDragonBones);
 	GDREGISTER_VIRTUAL_CLASS(GDArmatureDisplay);
 	GDREGISTER_VIRTUAL_CLASS(GDSlot);
 	GDREGISTER_VIRTUAL_CLASS(GDBone2D);
-    GDREGISTER_CLASS(MMDragonBones::MMDragonBonesResource);
+
+    GDREGISTER_CLASS(MMDragonBones);
 
 	resource_loader_mmdragonbones.instantiate();
 	ResourceLoader::add_resource_format_loader(resource_loader_mmdragonbones);
@@ -77,6 +81,10 @@ void register_mmdragonbones_types(ModuleInitializationLevel p_level)
 
 void unregister_mmdragonbones_types(ModuleInitializationLevel p_level)
 {
+    if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
+		return;
+	}
+
 	ResourceLoader::remove_resource_format_loader(resource_loader_mmdragonbones);
 	resource_loader_mmdragonbones.unref();
 }
