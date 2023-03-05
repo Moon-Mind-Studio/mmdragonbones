@@ -66,15 +66,15 @@ void register_mmdragonbones_types(ModuleInitializationLevel p_level)
 		return;
 	}
 
-    GDREGISTER_VIRTUAL_CLASS(GDOwnerNode);
-    GDREGISTER_VIRTUAL_CLASS(GDDisplay);
+    ClassDB::register_class<GDOwnerNode>(true);
+    ClassDB::register_class<GDDisplay>(true);
     
-	GDREGISTER_VIRTUAL_CLASS(GDArmatureDisplay);
-	GDREGISTER_VIRTUAL_CLASS(GDSlot);
-	GDREGISTER_VIRTUAL_CLASS(GDBone2D);
+	ClassDB::register_class<GDArmatureDisplay>(true);
+	ClassDB::register_class<GDSlot>(true);
+	ClassDB::register_class<GDBone2D>(true);
 
-    GDREGISTER_CLASS(MMDragonBones::MMDragonBonesResource);
-    GDREGISTER_CLASS(MMDragonBones);
+    ClassDB::register_class<MMDragonBones::MMDragonBonesResource>();
+    ClassDB::register_class<MMDragonBones>();
 
 	resource_loader_mmdragonbones.instantiate();
 	ResourceLoader::add_resource_format_loader(resource_loader_mmdragonbones);
