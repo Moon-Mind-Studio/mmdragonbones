@@ -883,7 +883,7 @@ void MMDragonBones::_bind_methods()
     ClassDB::bind_method(D_METHOD("get_animation_process_mode"),&MMDragonBones::get_animation_process_mode);
 
 	// This is how we set top level properties
-    ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "texture", PROPERTY_HINT_RESOURCE_TYPE, "Texture"), "set_texture", "get_texture");
+    ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "texture", PROPERTY_HINT_RESOURCE_TYPE, "Texture2D"), "set_texture", "get_texture");
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "debug"), "set_debug", "is_debug");
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "flippedX"), "flip_x", "is_fliped_x");
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "flippedY"), "flip_y", "is_fliped_y");
