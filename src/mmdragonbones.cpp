@@ -754,7 +754,7 @@ void MMDragonBones::set_texture(const Ref<Texture2D> &_p_texture) {
     if(p_armature)
     {
         p_armature->update_texture_atlas(m_texture_atlas);
-        //update();
+        p_armature->queue_redraw();
     }
 }
 
