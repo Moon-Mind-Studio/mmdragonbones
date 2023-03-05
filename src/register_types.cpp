@@ -11,7 +11,7 @@
 
 class ResourceFormatLoaderMMDragonBones : public ResourceFormatLoader {
 public:
-	    virtual Ref<Resource> load(const String &p_path, const String &p_original_path, Error *r_error, bool p_use_sub_threads, float *r_progress, bool p_no_cache) {
+	virtual Ref<Resource> load(const String &p_path, const String &p_original_path, Error *r_error, bool p_use_sub_threads, float *r_progress, CacheMode p_cache_mode) {
 
 		MMDragonBonesResource* __p_res = memnew(MMDragonBonesResource);
 		Ref<MMDragonBonesResource> __p_ref(__p_res);
@@ -19,6 +19,8 @@ public:
 		String __str_path_base = p_path.get_basename();
 
         __str_path_base.trim_suffix("_ske");
+
+        UtilityFunctions::print(__str_path_base);
 
         // texture path
         __p_ref->set_def_texture_path(__str_path_base + "_tex.png");
@@ -36,16 +38,15 @@ public:
 		return __p_ref;
 	}
 
-
     virtual void get_recognized_extensions(List<String> *p_extensions) const
     {
 		p_extensions->push_back("dbbin");
 		p_extensions->push_back("json");
 	}
 
-    virtual bool handles_type(const String& p_type) const
+    virtual bool handles_type(const String &p_type) const
     {
-		return p_type=="mmdragonbonesResource";
+		return p_type=="MMDragonBonesResource";
 	}
 
     virtual String get_resource_type(const String &p_path) const
@@ -53,7 +54,7 @@ public:
 		String el = p_path.get_extension().to_lower();
 
         if ((el == "json" || el == "dbbin") && p_path.get_basename().to_lower().ends_with("_ske"))
-            return "mmdragonbonesResource";
+            return "MMDragonBonesResource";
         return "";
     }
 };

@@ -60,8 +60,6 @@ protected:
     void _notification(int _what);
 	static void _bind_methods();
 
-    bool _set(const StringName& _str_name, const Variant& _c_r_value);
-    bool _get(const StringName& _str_name, Variant &_r_ret) const;
     void _get_property_list(List<PropertyInfo> *_p_list) const;
 
 public:

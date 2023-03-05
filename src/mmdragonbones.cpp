@@ -1,5 +1,6 @@
 #include "mmdragonbones.h"
 
+#include <godot_cpp/variant/utility_functions.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/core/memory.hpp>
 #include <godot_cpp/classes/engine.hpp>
@@ -761,60 +762,6 @@ void MMDragonBones::set_texture(const Ref<Texture2D> &_p_texture) {
 Ref<Texture2D> MMDragonBones::get_texture() const
 {
     return m_texture_atlas;
-}
-
-bool MMDragonBones::_set(const StringName& _str_name, const Variant& _c_r_value)
-{
-    String name = _str_name;
-
-    if (name == "playback/curr_animation")
-    {
-		if(str_curr_anim == _c_r_value)
-			return false;
-
-		str_curr_anim = _c_r_value;
-		if (b_inited)
-		{
-			if (str_curr_anim == "[none]")
-				stop();
-			else if (has_anim(str_curr_anim))
-			{
-				if(b_playing || b_try_playing)
-					play();
-				else
-					p_armature->getAnimation()->gotoAndStopByProgress(str_curr_anim.ascii().get_data());
-			}
-		}
-	}
-	else if (name == "playback/loop")
-	{
-		c_loop = _c_r_value;
-		if (b_inited && b_playing)
-		{
-			_reset();
-			play();
-		}
-	}
-	else if (name == "playback/progress")
-	{
-		seek(_c_r_value);
-	}
-
-	return true;
-}
-
-bool MMDragonBones::_get(const StringName& _str_name, Variant &_r_ret) const
-{
-
-    String __name = _str_name;
-
-    if (__name == "playback/curr_animation")
-        _r_ret = str_curr_anim;
-    else if (__name == "playback/loop")
-        _r_ret = c_loop;
-    else if (__name == "playback/progress")
-        _r_ret = get_progress();
-    return true;
 }
 
 void MMDragonBones::_bind_methods()
