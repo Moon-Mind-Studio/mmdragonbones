@@ -11,13 +11,13 @@
 
 //////////////////////////////////////////////////////////////////
 //// Resource
-MMDragonBones::MMDragonBonesResource::MMDragonBonesResource()
+MMDragonBonesResource::MMDragonBonesResource()
 {
     p_data_texture_atlas = nullptr;
     p_data_bones = nullptr;
 }
 
-MMDragonBones::MMDragonBonesResource::~MMDragonBonesResource()
+MMDragonBonesResource::~MMDragonBonesResource()
 {
     if(p_data_texture_atlas)
     {
@@ -48,19 +48,19 @@ char*  __load_file(const String& _file_path)
     return __p_data;
 }
 
-void       MMDragonBones::MMDragonBonesResource::set_def_texture_path(const String& _path)
+void       MMDragonBonesResource::set_def_texture_path(const String& _path)
 {
     str_default_tex_path = _path;
 }
 
-bool       MMDragonBones::MMDragonBonesResource::load_texture_atlas_data(const String& _path)
+bool       MMDragonBonesResource::load_texture_atlas_data(const String& _path)
 {
     p_data_texture_atlas = __load_file(_path);
     ERR_FAIL_COND_V(!p_data_texture_atlas, false);
     return true;
 }
 
-bool       MMDragonBones::MMDragonBonesResource::load_bones_data(const String& _path)
+bool       MMDragonBonesResource::load_bones_data(const String& _path)
 {
     p_data_bones = __load_file(_path);
     ERR_FAIL_COND_V(!p_data_bones, false);
@@ -256,7 +256,7 @@ void MMDragonBones::set_resource(Ref<MMDragonBonesResource> _p_data)
 	}
 }
 
-Ref<MMDragonBones::MMDragonBonesResource> MMDragonBones::get_resource()
+Ref<MMDragonBonesResource> MMDragonBones::get_resource()
 {
     return m_res;
 }

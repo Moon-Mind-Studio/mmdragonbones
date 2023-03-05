@@ -13,8 +13,8 @@ class ResourceFormatLoaderMMDragonBones : public ResourceFormatLoader {
 public:
 	    virtual Ref<Resource> load(const String &p_path, const String &p_original_path, Error *r_error, bool p_use_sub_threads, float *r_progress, bool p_no_cache) {
 
-		MMDragonBones::MMDragonBonesResource* __p_res = memnew(MMDragonBones::MMDragonBonesResource);
-		Ref<MMDragonBones::MMDragonBonesResource> __p_ref(__p_res);
+		MMDragonBonesResource* __p_res = memnew(MMDragonBonesResource);
+		Ref<MMDragonBonesResource> __p_ref(__p_res);
 		
 		String __str_path_base = p_path.get_basename();
 
@@ -73,7 +73,7 @@ void register_mmdragonbones_types(ModuleInitializationLevel p_level)
 	ClassDB::register_class<GDSlot>(true);
 	ClassDB::register_class<GDBone2D>(true);
 
-    ClassDB::register_class<MMDragonBones::MMDragonBonesResource>();
+    ClassDB::register_class<MMDragonBonesResource>();
     ClassDB::register_class<MMDragonBones>();
 
 	resource_loader_mmdragonbones.instantiate();

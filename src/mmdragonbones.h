@@ -12,14 +12,8 @@ using namespace godot;
 
 DRAGONBONES_USING_NAME_SPACE;
 
-class MMDragonBones : public GDOwnerNode
+class MMDragonBonesResource : public Resource
 {
-GDCLASS(MMDragonBones, GDOwnerNode);
-
-public:
-	// Resource class
-    class MMDragonBonesResource : public Resource
-    {
     GDCLASS(MMDragonBonesResource, Resource);
 
 	protected:
@@ -36,10 +30,14 @@ public:
         String           str_default_tex_path;
         char*            p_data_texture_atlas;
         char*            p_data_bones;
-	};
+};
+
+class MMDragonBones : public GDOwnerNode
+{
+GDCLASS(MMDragonBones, GDOwnerNode);
 
 private:
-    GDFactory*                  p_factory;
+	GDFactory*                  p_factory;
 	Ref<Texture2D> 				m_texture_atlas;
     Ref<MMDragonBonesResource>  m_res;
     String                      str_curr_anim;
