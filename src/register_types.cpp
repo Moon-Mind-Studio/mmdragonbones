@@ -9,57 +9,7 @@
 #include <gdextension_interface.h>
 #include <godot_cpp/classes/ref.hpp>
 
-class ResourceFormatLoaderMMDragonBones : public ResourceFormatLoader {
-public:
-	virtual Ref<Resource> load(const String &p_path, const String &p_original_path, Error *r_error, bool p_use_sub_threads, float *r_progress, CacheMode p_cache_mode) {
-
-		MMDragonBonesResource* __p_res = memnew(MMDragonBonesResource);
-		Ref<MMDragonBonesResource> __p_ref(__p_res);
-		
-		String __str_path_base = p_path.get_basename();
-
-        __str_path_base.trim_suffix("_ske");
-
-        UtilityFunctions::print(__str_path_base);
-
-        // texture path
-        __p_ref->set_def_texture_path(__str_path_base + "_tex.png");
-
-        // loading atlas data
-        bool __bret = __p_ref->load_texture_atlas_data(String(__str_path_base + "_tex.json").ascii().get_data());
-        ERR_FAIL_COND_V(!__bret, 0);
-
-        // loading bones data
-        __bret = __p_ref->load_bones_data(p_path.ascii().get_data());
-        ERR_FAIL_COND_V(!__bret, 0);
-
-	    __p_res->set_def_texture_path(p_path);
-
-		return __p_ref;
-	}
-
-    virtual void get_recognized_extensions(List<String> *p_extensions) const
-    {
-		p_extensions->push_back("dbbin");
-		p_extensions->push_back("json");
-	}
-
-    virtual bool handles_type(const String &p_type) const
-    {
-		return p_type=="MMDragonBonesResource";
-	}
-
-    virtual String get_resource_type(const String &p_path) const
-    {
-		String el = p_path.get_extension().to_lower();
-
-        if ((el == "json" || el == "dbbin") && p_path.get_basename().to_lower().ends_with("_ske"))
-            return "MMDragonBonesResource";
-        return "";
-    }
-};
-
-static Ref<ResourceFormatLoaderMMDragonBones> resource_loader_mmdragonbones;
+static Ref<ResourceFormatLoaderMMDragonBones> resource_loader_mmdragonbones = NULL;
 
 void register_mmdragonbones_types(ModuleInitializationLevel p_level)
 {
@@ -78,7 +28,7 @@ void register_mmdragonbones_types(ModuleInitializationLevel p_level)
     ClassDB::register_class<MMDragonBones>();
 
 	resource_loader_mmdragonbones.instantiate();
-	ResourceLoader::add_resource_format_loader(resource_loader_mmdragonbones);
+	ResourceLoader::get_singleton()->add_resource_format_loader(resource_loader_mmdragonbones, true);
 }
 
 void unregister_mmdragonbones_types(ModuleInitializationLevel p_level)
@@ -87,7 +37,7 @@ void unregister_mmdragonbones_types(ModuleInitializationLevel p_level)
 		return;
 	}
 
-	ResourceLoader::remove_resource_format_loader(resource_loader_mmdragonbones);
+	ResourceLoader::get_singleton()->remove_resource_format_loader(resource_loader_mmdragonbones);
 	resource_loader_mmdragonbones.unref();
 }
 
@@ -99,7 +49,7 @@ GDExtensionBool GDE_EXPORT mmdragonbones_library_init(const GDExtensionInterface
     init_obj.register_initializer(register_mmdragonbones_types);
 	init_obj.register_terminator(unregister_mmdragonbones_types);
 	init_obj.set_minimum_library_initialization_level(MODULE_INITIALIZATION_LEVEL_SCENE);
-
+	
     return init_obj.init();
 }
 }

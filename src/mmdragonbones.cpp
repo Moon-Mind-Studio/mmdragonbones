@@ -11,6 +11,62 @@
 #include <godot_cpp/classes/ref.hpp>
 
 //////////////////////////////////////////////////////////////////
+//// ResourceLoader
+
+Ref<Resource> ResourceFormatLoaderMMDragonBones::load(const String &p_path, const String &p_original_path, Error *r_error, bool p_use_sub_threads, float *r_progress, CacheMode p_cache_mode) {
+
+		MMDragonBonesResource* __p_res = memnew(MMDragonBonesResource);
+		Ref<MMDragonBonesResource> __p_ref(__p_res);
+		
+		String __str_path_base = p_path.get_basename();
+
+        __str_path_base.trim_suffix("_ske");
+
+        UtilityFunctions::print(__str_path_base);
+
+        // texture path
+        __p_ref->set_def_texture_path(__str_path_base + "_tex.png");
+
+        // loading atlas data
+        bool __bret = __p_ref->load_texture_atlas_data(String(__str_path_base + "_tex.json").ascii().get_data());
+        ERR_FAIL_COND_V(!__bret, 0);
+
+        // loading bones data
+        __bret = __p_ref->load_bones_data(p_path.ascii().get_data());
+        ERR_FAIL_COND_V(!__bret, 0);
+
+	    __p_res->set_def_texture_path(p_path);
+
+		return __p_ref;
+	}
+
+void ResourceFormatLoaderMMDragonBones::get_recognized_extensions(List<String> *p_extensions) const
+{
+	UtilityFunctions::print(p_extensions);
+	p_extensions->push_back("dbbin");
+	p_extensions->push_back("json");
+}
+
+bool ResourceFormatLoaderMMDragonBones::handles_type(const String &p_type) const
+{
+	UtilityFunctions::print("Handles type");
+	return p_type==StringName("MMDragonBonesResource");
+}
+
+String ResourceFormatLoaderMMDragonBones::get_resource_type(const String &p_path) const
+{
+	UtilityFunctions::print("get_resource_type");
+	String el = p_path.get_extension().to_lower();
+
+    if ((el == "json" || el == "dbbin") && p_path.get_basename().to_lower().ends_with("_ske"))
+        return "MMDragonBonesResource";
+    return "";
+}
+
+//////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////
 //// Resource
 MMDragonBonesResource::MMDragonBonesResource()
 {
@@ -221,7 +277,7 @@ void MMDragonBones::set_resource(Ref<MMDragonBonesResource> _p_data)
 
 	// To support non-texture atlas; I'd want to look around here
     if(!m_texture_atlas.is_valid() || __old_texture_path != m_res->str_default_tex_path)
-        m_texture_atlas = ResourceLoader::load(m_res->str_default_tex_path);
+        m_texture_atlas = ResourceLoader::get_singleton()->load(m_res->str_default_tex_path);
 
     // correction for old version of DB tad files (Zero width, height)
     if(m_texture_atlas.is_valid())

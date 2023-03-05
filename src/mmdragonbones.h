@@ -5,12 +5,20 @@
 #include "GDFactory.h"
 #include "GDDisplay.h"
 #include "godot_cpp/classes/resource.hpp"
-
+#include <godot_cpp/classes/resource_format_loader.hpp>
 #include <gdextension_interface.h>
 #include <godot_cpp/classes/ref.hpp>
 using namespace godot;
 
 DRAGONBONES_USING_NAME_SPACE;
+
+class ResourceFormatLoaderMMDragonBones : public ResourceFormatLoader {
+public:
+	virtual Ref<Resource> load(const String &p_path, const String &p_original_path = "", Error *r_error = nullptr, bool p_use_sub_threads = false, float *r_progress = nullptr, CacheMode p_cache_mode = CACHE_MODE_REUSE);
+	virtual void get_recognized_extensions(List<String> *p_extensions) const;
+	virtual bool handles_type(const String &p_type) const;
+	virtual String get_resource_type(const String &p_path) const;
+};
 
 class MMDragonBonesResource : public Resource
 {
