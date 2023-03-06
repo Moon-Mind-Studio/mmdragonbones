@@ -1,6 +1,8 @@
 #include "mmdragonbones.h"
+#include "GDMesh.h"
 #include "GDArmatureDisplay.h"
 
+#include <godot_cpp/classes/object.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/classes/resource_format_loader.hpp>
@@ -9,7 +11,7 @@
 #include <gdextension_interface.h>
 #include <godot_cpp/classes/ref.hpp>
 
-static Ref<ResourceFormatLoaderMMDragonBones> resource_loader_mmdragonbones = NULL;
+static Ref<ResourceFormatLoaderMMDB> resource_loader_mmdragonbones;
 
 void register_mmdragonbones_types(ModuleInitializationLevel p_level)
 {
@@ -23,6 +25,7 @@ void register_mmdragonbones_types(ModuleInitializationLevel p_level)
 	ClassDB::register_class<GDArmatureDisplay>(true);
 	ClassDB::register_class<GDSlot>(true);
 	ClassDB::register_class<GDBone2D>(true);
+	ClassDB::register_class<GDMesh>(true);
 
     ClassDB::register_class<MMDragonBonesResource>();
     ClassDB::register_class<MMDragonBones>();

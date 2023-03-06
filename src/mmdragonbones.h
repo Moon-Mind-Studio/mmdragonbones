@@ -12,20 +12,12 @@ using namespace godot;
 
 DRAGONBONES_USING_NAME_SPACE;
 
-class ResourceFormatLoaderMMDragonBones : public ResourceFormatLoader {
-public:
-	virtual Ref<Resource> load(const String &p_path, const String &p_original_path = "", Error *r_error = nullptr, bool p_use_sub_threads = false, float *r_progress = nullptr, CacheMode p_cache_mode = CACHE_MODE_REUSE);
-	virtual void get_recognized_extensions(List<String> *p_extensions) const;
-	virtual bool handles_type(const String &p_type) const;
-	virtual String get_resource_type(const String &p_path) const;
-};
-
 class MMDragonBonesResource : public Resource
 {
     GDCLASS(MMDragonBonesResource, Resource);
 
 	protected:
-		static void _bind_methods(){};
+		static void _bind_methods();
 
 	public:		
 		MMDragonBonesResource();
@@ -144,6 +136,15 @@ public:
 private:
 	const DragonBonesData *get_dragonbones_data() const;
 	ArmatureData *get_armature_data(const String &_armature_name);
+};
+
+class ResourceFormatLoaderMMDB : public ResourceFormatLoader {
+
+public:
+	virtual Ref<Resource> load(const String &p_path, const String &p_original_path = "", Error *r_error = nullptr, bool p_use_sub_threads = false, float *r_progress = nullptr, CacheMode p_cache_mode = CACHE_MODE_REUSE);
+	virtual void get_recognized_extensions(List<String> *p_extensions) const;
+	virtual bool handles_type(const String &p_type) const;
+	virtual String get_resource_type(const String &p_path) const;
 };
 
 #endif // mmdragonbones_H
