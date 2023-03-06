@@ -3,11 +3,6 @@
 #include "GDDisplay.h"
 #include "GDMesh.h"
 
-#include <godot_cpp/core/class_db.hpp>
-#include <gdextension_interface.h>
-#include <godot_cpp/classes/ref.hpp>
-using namespace godot;
-
 GDArmatureDisplay::GDArmatureDisplay()
 {
 	p_armature = nullptr;

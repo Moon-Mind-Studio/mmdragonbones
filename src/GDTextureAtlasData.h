@@ -3,10 +3,6 @@
 
 #include "dragonBones/DragonBonesHeaders.h"
 
-#include <gdextension_interface.h>
-#include <godot_cpp/classes/ref.hpp>
-
-using namespace godot;
 DRAGONBONES_USING_NAME_SPACE;
 class GDTextureAtlasData : public TextureAtlasData
 {

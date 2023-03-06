@@ -3,12 +3,8 @@
 
 #include "dragonBones/DragonBonesHeaders.h"
 #include <memory>
-#include <godot_cpp/classes/bone2d.hpp>
+#include "scene/2d/skeleton_2d.h"
 
-#include <gdextension_interface.h>
-#include <godot_cpp/classes/ref.hpp>
-
-using namespace godot;
 DRAGONBONES_USING_NAME_SPACE;
 
 class GDBone2D : public Bone2D {

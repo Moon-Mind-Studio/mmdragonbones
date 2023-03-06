@@ -1,15 +1,5 @@
 #include "mmdragonbones.h"
 
-#include <godot_cpp/variant/utility_functions.hpp>
-#include <godot_cpp/classes/resource_loader.hpp>
-#include <godot_cpp/core/memory.hpp>
-#include <godot_cpp/classes/engine.hpp>
-#include <godot_cpp/classes/file_access.hpp>
-#include <godot_cpp/core/object.hpp>
-#include <godot_cpp/core/class_db.hpp>
-#include <gdextension_interface.h>
-#include <godot_cpp/classes/ref.hpp>
-
 //////////////////////////////////////////////////////////////////
 //// ResourceLoader
 
@@ -38,20 +28,17 @@ Ref<Resource> ResourceFormatLoaderMMDB::load(const String &path, const String &p
 
 void ResourceFormatLoaderMMDB::get_recognized_extensions(List<String> *p_extensions) const
 {
-	UtilityFunctions::print(p_extensions);
 	p_extensions->push_back("dbbin");
 	p_extensions->push_back("json");
 }
 
 bool ResourceFormatLoaderMMDB::handles_type(const String &type) const
 {
-	UtilityFunctions::print("Handles type");
 	return type==StringName("MMDragonBonesResource");
 }
 
 String ResourceFormatLoaderMMDB::get_resource_type(const String &p_path) const
 {
-	UtilityFunctions::print("get_resource_type");
 	String el = p_path.get_extension().to_lower();
 
     if ((el == "json" || el == "dbbin") && p_path.get_basename().to_lower().ends_with("_ske"))
@@ -281,7 +268,7 @@ void MMDragonBones::set_resource(Ref<MMDragonBonesResource> _p_data)
 
 	// To support non-texture atlas; I'd want to look around here
     if(!m_texture_atlas.is_valid() || __old_texture_path != m_res->str_default_tex_path)
-        m_texture_atlas = ResourceLoader::get_singleton()->load(m_res->str_default_tex_path);
+        m_texture_atlas = ResourceLoader::load(m_res->str_default_tex_path);
 
     // correction for old version of DB tad files (Zero width, height)
     if(m_texture_atlas.is_valid())
@@ -942,4 +929,59 @@ void MMDragonBones::_get_property_list(List<PropertyInfo>* _p_list) const
 
     _p_list->push_back(PropertyInfo(Variant::STRING, "playback/curr_animation", PROPERTY_HINT_ENUM, __str_hint));
     _p_list->push_back(PropertyInfo(Variant::INT, "playback/loop", PROPERTY_HINT_RANGE, "-1,100,1"));
+}
+
+
+bool MMDragonBones::_set(const StringName& _str_name, const Variant& _c_r_value)
+{
+    String name = _str_name;
+
+    if (name == "playback/curr_animation")
+    {
+		if(str_curr_anim == String(_c_r_value))
+			return false;
+
+		str_curr_anim = _c_r_value;
+		if (b_inited)
+		{
+			if (str_curr_anim == "[none]")
+				stop();
+			else if (has_anim(str_curr_anim))
+			{
+				if(b_playing || b_try_playing)
+					play();
+				else
+					p_armature->getAnimation()->gotoAndStopByProgress(str_curr_anim.ascii().get_data());
+			}
+		}
+	}
+	else if (name == "playback/loop")
+	{
+		c_loop = _c_r_value;
+		if (b_inited && b_playing)
+		{
+			_reset();
+			play();
+		}
+	}
+	else if (name == "playback/progress")
+	{
+		seek(_c_r_value);
+	}
+
+	return true;
+}
+
+bool MMDragonBones::_get(const StringName& _str_name, Variant &_r_ret) const
+{
+
+    String __name = _str_name;
+
+    if (__name == "playback/curr_animation")
+        _r_ret = str_curr_anim;
+    else if (__name == "playback/loop")
+        _r_ret = c_loop;
+    else if (__name == "playback/progress")
+        _r_ret = get_progress();
+    return true;
 }

@@ -3,11 +3,6 @@
 #include "GDArmatureDisplay.h"
 #include "GDTextureAtlasData.h"
 #include "GDTextureData.h"
-#include <godot_cpp/classes/node2d.hpp>
-
-#include <godot_cpp/core/class_db.hpp>
-#include <gdextension_interface.h>
-#include <godot_cpp/classes/ref.hpp>
 
 #define MATRIX_TRANSFORM  Transform2D
 
@@ -128,7 +123,7 @@ void Slot_GD::_removeDisplay()
 
 }
 
-void Slot_GD::__get_uv_pt(Point2& _pt, bool _is_rot, float _u, float _v, const Rectangle& _reg, const TextureAtlasData *_p_atlas)
+void Slot_GD::__get_uv_pt(Point2& _pt, bool _is_rot, float _u, float _v, const dragonBones::Rectangle& _reg, const TextureAtlasData *_p_atlas)
 {
     if (_is_rot)
     {
@@ -187,9 +182,9 @@ void Slot_GD::_updateFrame()
                         v = floatArray[uvOffset + i + 1];
                         __get_uv_pt(__uv, currentTextureData->rotated, u, v, region, atlas);
                         
-                        frameDisplay->verticesColor[iH] = Color(1,1,1,1);
-                        frameDisplay->verticesUV[iH] = __uv;
-                        frameDisplay->verticesPos[iH] = Point2(floatArray[vertexOffset + i],
+                        frameDisplay->verticesColor.write[iH] = Color(1,1,1,1);
+                        frameDisplay->verticesUV.write[iH] = __uv;
+                        frameDisplay->verticesPos.write[iH] = Point2(floatArray[vertexOffset + i],
 						hasFFD * floatArray[vertexOffset + i + 1]);
 
                     }
@@ -197,7 +192,7 @@ void Slot_GD::_updateFrame()
                     // setup indicies
                     for (std::size_t i = 0; i < triangleCount * 3; ++i)
                     {
-                        frameDisplay->indices[i] = intArray[currentVerticesData ->offset + (unsigned)BinaryOffset::MeshVertexIndices + i];
+                        frameDisplay->indices.write[i] = intArray[currentVerticesData ->offset + (unsigned)BinaryOffset::MeshVertexIndices + i];
 			
                     }
 
@@ -207,12 +202,12 @@ void Slot_GD::_updateFrame()
                 {
                     frameDisplay->indices.resize(6);
 
-                    frameDisplay->indices[0] = 0;
-                    frameDisplay->indices[1] = 1;
-                    frameDisplay->indices[2] = 2;
-                    frameDisplay->indices[3] = 2;
-                    frameDisplay->indices[4] = 3;
-                    frameDisplay->indices[5] = 0;
+                    frameDisplay->indices.write[0] = 0;
+                    frameDisplay->indices.write[1] = 1;
+                    frameDisplay->indices.write[2] = 2;
+                    frameDisplay->indices.write[3] = 2;
+                    frameDisplay->indices.write[4] = 3;
+                    frameDisplay->indices.write[5] = 0;
 
                     frameDisplay->verticesColor.resize(4);
                     frameDisplay->verticesUV.resize(4);
@@ -222,20 +217,20 @@ void Slot_GD::_updateFrame()
                     const auto height = (currentTextureData->rotated ? region.width : region.height) * scale/2.f;
                     const auto width = (currentTextureData->rotated ? region.height : region.width) * scale/2.f;
 
-                    frameDisplay->verticesColor[0] = Color(1,1,1,1);
-                    frameDisplay->verticesColor[1] = Color(1,1,1,1);
-                    frameDisplay->verticesColor[2] = Color(1,1,1,1);
-                    frameDisplay->verticesColor[3] = Color(1,1,1,1);
+                    frameDisplay->verticesColor.write[0] = Color(1,1,1,1);
+                    frameDisplay->verticesColor.write[1] = Color(1,1,1,1);
+                    frameDisplay->verticesColor.write[2] = Color(1,1,1,1);
+                    frameDisplay->verticesColor.write[3] = Color(1,1,1,1);
 
-                    frameDisplay->verticesPos[3] = Vector2(-width, -height);
-                    frameDisplay->verticesPos[2] = Vector2(width, -height);
-                    frameDisplay->verticesPos[1] = Vector2(width, height);
-                    frameDisplay->verticesPos[0] = Vector2(-width, height);
+                    frameDisplay->verticesPos.write[3] = Vector2(-width, -height);
+                    frameDisplay->verticesPos.write[2] = Vector2(width, -height);
+                    frameDisplay->verticesPos.write[1] = Vector2(width, height);
+                    frameDisplay->verticesPos.write[0] = Vector2(-width, height);
 
-                    __get_uv_pt(frameDisplay->verticesUV[0], currentTextureData->rotated, 0, 0, region, atlas);
-                    __get_uv_pt(frameDisplay->verticesUV[1], currentTextureData->rotated, 1.f, 0, region, atlas);
-                    __get_uv_pt(frameDisplay->verticesUV[2], currentTextureData->rotated, 1.f, 1.f, region, atlas);
-                    __get_uv_pt(frameDisplay->verticesUV[3], currentTextureData->rotated, 0, 1.f, region, atlas);
+                    __get_uv_pt(frameDisplay->verticesUV.write[0], currentTextureData->rotated, 0, 0, region, atlas);
+                    __get_uv_pt(frameDisplay->verticesUV.write[1], currentTextureData->rotated, 1.f, 0, region, atlas);
+                    __get_uv_pt(frameDisplay->verticesUV.write[2], currentTextureData->rotated, 1.f, 1.f, region, atlas);
+                    __get_uv_pt(frameDisplay->verticesUV.write[3], currentTextureData->rotated, 0, 1.f, region, atlas);
 
                     _pivotY = 0;
                     _pivotX = 0;
@@ -317,7 +312,7 @@ void Slot_GD::_updateMesh()
 				}
 			}
 
-            meshDisplay->verticesPos[i] = Vector2(xG, yG);
+            meshDisplay->verticesPos.write[i] = Vector2(xG, yG);
 
 		}
 	}
@@ -339,7 +334,7 @@ void Slot_GD::_updateMesh()
             const auto xG = floatArray[vertexOffset + i] * scale + deformVertices[i];
             const auto yG = floatArray[vertexOffset + i + 1] * scale + deformVertices[i + 1];
 
-            meshDisplay->verticesPos[iH] = Vector2(xG, -yG);
+            meshDisplay->verticesPos.write[iH] = Vector2(xG, -yG);
 
 		}
 	}

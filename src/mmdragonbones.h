@@ -4,11 +4,7 @@
 #include "dragonBones/DragonBonesHeaders.h"
 #include "GDFactory.h"
 #include "GDDisplay.h"
-#include "godot_cpp/classes/resource.hpp"
-#include <godot_cpp/classes/resource_format_loader.hpp>
-#include <gdextension_interface.h>
-#include <godot_cpp/classes/ref.hpp>
-using namespace godot;
+#include "core/io/resource.h"
 
 DRAGONBONES_USING_NAME_SPACE;
 
@@ -59,6 +55,9 @@ private:
 protected:
     void _notification(int _what);
 	static void _bind_methods();
+
+	bool _set(const StringName& _str_name, const Variant& _c_r_value);
+    bool _get(const StringName& _str_name, Variant &_r_ret) const;
 
     void _get_property_list(List<PropertyInfo> *_p_list) const;
 

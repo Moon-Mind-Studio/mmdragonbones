@@ -3,10 +3,8 @@
 
 #include "GDDisplay.h"
 
-#include <godot_cpp/templates/vector.hpp>
-#include <godot_cpp/core/math.hpp>
-#include <gdextension_interface.h>
-#include <godot_cpp/classes/ref.hpp>
+#include "core/templates/vector.h"
+#include "core/math.h"
 
 DRAGONBONES_USING_NAME_SPACE;
 
@@ -85,7 +83,7 @@ public:
         col_debug.a = modulate.a;
         for(unsigned long i = 0; i < verticesColor.size(); ++i)
         {
-            verticesColor[i] = modulate;
+            verticesColor.write[i] = modulate;
         }
     }
 

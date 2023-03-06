@@ -4,8 +4,6 @@
 #include <memory>
 #include "dragonBones/DragonBonesHeaders.h"
 #include "dragonBones/model/TextureAtlasData.h"
-#include <gdextension_interface.h>
-#include <godot_cpp/classes/ref.hpp>
 
 DRAGONBONES_USING_NAME_SPACE;
 

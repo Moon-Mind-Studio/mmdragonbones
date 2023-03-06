@@ -1,6 +1,4 @@
-#include <gdextension_interface.h>
-#include <godot_cpp/classes/ref.hpp>
-using namespace godot;
+#include "../../register_module_types.h"
 
 void register_mmdragonbones_types(ModuleInitializationLevel p_level);
 void unregister_mmdragonbones_types(ModuleInitializationLevel p_level);

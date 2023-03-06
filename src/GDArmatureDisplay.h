@@ -5,12 +5,6 @@
 #include "GDBone2D.h"
 #include "GDSlot.h"
 
-#include <godot_cpp/core/class_db.hpp>
-#include <godot_cpp/classes/texture.hpp>
-#include <gdextension_interface.h>
-#include <godot_cpp/classes/ref.hpp>
-
-using namespace godot;
 DRAGONBONES_USING_NAME_SPACE;
 
 class GDArmatureDisplay : public GDDisplay, virtual public IArmatureProxy

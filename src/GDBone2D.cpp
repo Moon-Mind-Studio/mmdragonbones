@@ -1,10 +1,5 @@
 #include "GDBone2D.h"
 
-#include <godot_cpp/core/class_db.hpp>
-#include <gdextension_interface.h>
-#include <godot_cpp/classes/ref.hpp>
-using namespace godot;
-
 void GDBone2D::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_bone_name"), &GDBone2D::get_bone_name);
 	ClassDB::bind_method(D_METHOD("get_bone_position"), &GDBone2D::get_bone_position);

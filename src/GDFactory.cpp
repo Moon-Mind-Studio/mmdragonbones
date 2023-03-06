@@ -6,8 +6,6 @@
 #include "GDArmatureDisplay.h"
 #include "GDMesh.h"
 
-#include <godot_cpp/classes/ref.hpp>
-
 GDFactory::GDFactory(GDOwnerNode *_p_owner)
 {
     p_owner = _p_owner;

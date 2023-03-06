@@ -2,16 +2,9 @@
 #define GDSLOT_H
 
 #include <memory>
-#include "dragonBones/DragonBonesHeaders.h"
 #include "GDDisplay.h"
 
-#include <godot_cpp/variant/color.hpp>
-#include <godot_cpp/classes/node.hpp>
-#include <godot_cpp/variant/vector2.hpp>
-#include <gdextension_interface.h>
-#include <godot_cpp/classes/ref.hpp>
-
-using namespace godot;
+#include "dragonBones/DragonBonesHeaders.h"
 
 DRAGONBONES_USING_NAME_SPACE;
 
@@ -44,9 +37,7 @@ protected:
 	virtual void _onClear() override;
 
 
-    static void __get_uv_pt(Point2& _pt, bool _is_rot, float _u, float _v, const Rectangle& _reg, const TextureAtlasData *_p_atlas);
-
-
+    static void __get_uv_pt(Point2& _pt, bool _is_rot, float _u, float _v, const dragonBones::Rectangle& _reg, const TextureAtlasData *_p_atlas);
 
 };
 

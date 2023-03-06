@@ -1,5 +1,6 @@
 #include "GDTextureAtlasData.h"
 #include "GDTextureData.h"
+#include "core/math/rect2i.h"
 
 GDTextureAtlasData::GDTextureAtlasData()
 {

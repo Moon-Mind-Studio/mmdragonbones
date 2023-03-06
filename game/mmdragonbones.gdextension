@@ -1,7 +1,0 @@
-[configuration]
-
-entry_symbol = "mmdragonbones_library_init"
-
-[libraries]
-
-windows.x86_64 = "res://bin/dragonbones/libmmdragonbones.windows.template_debug.x86_64.dll"

@@ -11,9 +11,6 @@
 #include "GDTextureData.h"
 #include "GDBone2D.h"
 
-#include <gdextension_interface.h>
-#include <godot_cpp/classes/ref.hpp>
-
 DRAGONBONES_USING_NAME_SPACE;
 
 typedef std::function<void(EventObject*)> Func_t;

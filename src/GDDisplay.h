@@ -1,16 +1,7 @@
 #ifndef 	GDISPLAY_H
 #define     GDISPLAY_H
 
-#include "dragonBones/DragonBonesHeaders.h"
-
-#include <godot_cpp/classes/rendering_server.hpp>
-#include <godot_cpp/classes/canvas_item_material.hpp>
-#include <godot_cpp/classes/node2d.hpp>
-#include <gdextension_interface.h>
-#include <godot_cpp/classes/ref.hpp>
-
-using namespace godot;
-DRAGONBONES_USING_NAME_SPACE;
+#include "scene/2d/node_2d.h"
 
 class GDOwnerNode : public Node2D
 {
