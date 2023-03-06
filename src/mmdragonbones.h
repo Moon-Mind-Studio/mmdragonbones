@@ -93,6 +93,7 @@ public:
 	void set_animation_process_mode(GDArmatureDisplay::AnimMode _mode);
 	GDArmatureDisplay::AnimMode get_animation_process_mode() const;
 
+	void play(bool _b_play = true);
 	/**
 		THESE DEPRECATED FUNCTIONS WILL BE REMOVED IN VERSION 3.2.53
 	*/
@@ -121,7 +122,6 @@ public:
 	/* deprecated */ void cycle_next_item_in_slot(const String &_slot_name);
 	/* deprecated */ void cycle_previous_item_in_slot(const String &_slot_name);
 	/* deprecated */ bool is_playing() const;
-	/* deprecated */ void play(bool _b_play = true);
 	/* deprecated */ void play_from_time(float _f_time);
 	/* deprecated */ void play_from_progress(float _f_progress);
 	/* deprecated */ void play_new_animation(const String &_str_anim, int _num_times);

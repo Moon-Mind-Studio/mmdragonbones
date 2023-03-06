@@ -285,7 +285,7 @@ void MMDragonBones::set_resource(Ref<MMDragonBonesResource> _p_data)
     // add main armature
     add_child(p_armature);
 
-	//p_armature->force_parent_owned();
+	p_armature->force_parent_owned();
     b_inited = true;
 
     // update color and opacity and blending
@@ -839,7 +839,7 @@ void MMDragonBones::_bind_methods()
 	ClassDB::bind_method(D_METHOD("cycle_next_item_in_slot"), &MMDragonBones::cycle_next_item_in_slot);
 	ClassDB::bind_method(D_METHOD("cycle_previous_item_in_slot"), &MMDragonBones::cycle_previous_item_in_slot);
 
-    ClassDB::bind_method(D_METHOD("play"), &MMDragonBones::play);
+    ClassDB::bind_method(D_METHOD("play", "turn_on"), &MMDragonBones::play);
     ClassDB::bind_method(D_METHOD("play_from_time"), &MMDragonBones::play_from_time);
 	ClassDB::bind_method(D_METHOD("play_from_progress"), &MMDragonBones::play_from_progress);
 	ClassDB::bind_method(D_METHOD("play_new_animation"), &MMDragonBones::play_new_animation);
