@@ -1,11 +1,11 @@
 #include "register_types.h"
-#include "mmdragonbones.h"
-#include "GDMesh.h"
-#include "GDArmatureDisplay.h"
+#include "src/mmdragonbones.h"
+#include "src/GDMesh.h"
+#include "src/GDArmatureDisplay.h"
 
 static Ref<ResourceFormatLoaderMMDB> resource_loader_mmdragonbones;
 
-void register_mmdragonbones_types(ModuleInitializationLevel p_level)
+void initialize_mmdragonbones_module(ModuleInitializationLevel p_level)
 {
     if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
@@ -26,7 +26,7 @@ void register_mmdragonbones_types(ModuleInitializationLevel p_level)
 	ResourceLoader::add_resource_format_loader(resource_loader_mmdragonbones, true);
 }
 
-void unregister_mmdragonbones_types(ModuleInitializationLevel p_level)
+void uninitialize_mmdragonbones_module(ModuleInitializationLevel p_level)
 {
     if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
