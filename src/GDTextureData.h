@@ -3,7 +3,7 @@
 
 #include <memory>
 #include "dragonBones/DragonBonesHeaders.h"
-#include "dragonBones/model/TextureAtlasData.h"
+#include "core/math/rect2i.h"
 
 DRAGONBONES_USING_NAME_SPACE;
 
@@ -12,7 +12,7 @@ class GDTextureData : public TextureData
 	BIND_CLASS_TYPE_B(GDTextureData);
 
 public:	
-    Rect2i				textureRect;
+    Rect2i textureRect;
 
 public:
 	GDTextureData()

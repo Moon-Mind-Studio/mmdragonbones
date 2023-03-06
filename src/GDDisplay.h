@@ -1,7 +1,10 @@
 #ifndef 	GDISPLAY_H
 #define     GDISPLAY_H
 
+#include "dragonBones/DragonBonesHeaders.h"
 #include "scene/2d/node_2d.h"
+
+DRAGONBONES_USING_NAME_SPACE;
 
 class GDOwnerNode : public Node2D
 {

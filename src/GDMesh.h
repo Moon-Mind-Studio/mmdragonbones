@@ -4,7 +4,6 @@
 #include "GDDisplay.h"
 
 #include "core/templates/vector.h"
-#include "core/math.h"
 
 DRAGONBONES_USING_NAME_SPACE;
 
@@ -81,7 +80,7 @@ public:
     {
         GDDisplay::set_modulate(_col);
         col_debug.a = modulate.a;
-        for(unsigned long i = 0; i < verticesColor.size(); ++i)
+        for(int i = 0; i < verticesColor.size(); ++i)
         {
             verticesColor.write[i] = modulate;
         }
