@@ -39,6 +39,8 @@ public:
 	Vector2 get_bone_animation_position();
 	Vector2 get_bone_origin_position();
 	bool has_data();
+
+	GDBone2D() {set_autocalculate_length_and_angle(false);}
 };
 
 #endif
