@@ -939,7 +939,7 @@ bool MMDragonBones::_set(const StringName& _str_name, const Variant& _c_r_value)
     if (name == "playback/curr_animation")
     {
 		if(str_curr_anim == String(_c_r_value))
-			return false;
+			return true;
 
 		str_curr_anim = _c_r_value;
 		if (b_inited)
