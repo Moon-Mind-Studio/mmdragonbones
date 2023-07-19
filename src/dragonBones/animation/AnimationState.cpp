@@ -58,8 +58,8 @@ void AnimationState::_onClear()
 
     _timelineDirty = 2;
     _playheadState = 0;
-    _fadeState = -1;
-    _subFadeState = -1;
+    _fadeState = 0;
+    _subFadeState = 0;
     _position = 0.0f;
     _duration = 0.0f;
     _fadeTime = 0.0f;
@@ -497,7 +497,7 @@ void AnimationState::init(Armature* parmature, AnimationData* panimationData, An
     }
 
     _actionTimeline = BaseObject::borrowObject<ActionTimelineState>();
-    _actionTimeline->init(_armature, this, _animationData->actionTimeline); //
+    _actionTimeline->init(_armature, this, _animationData->actionTimeline);
     _actionTimeline->currentTime = _time;
     if (_actionTimeline->currentTime < 0.0f)
     {
