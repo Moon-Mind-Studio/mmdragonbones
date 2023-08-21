@@ -262,7 +262,7 @@ void MMDragonBones::set_resource(Ref<MMDragonBonesResource> _p_data)
     ERR_FAIL_COND(!__r_v_m_names.size());
 
     p_armature = static_cast<GDArmatureDisplay*>(p_factory->buildArmatureDisplay(__r_v_m_names[0].c_str()));
-
+	p_armature->set_name("mm_main_armature");
     // add children armature
     p_armature->p_owner = this;
 
